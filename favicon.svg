@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <style>
+    rect { fill: #2f6d80; }
+    text { fill: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      rect { fill: #74b8cc; }
+      text { fill: #17191a; }
+    }
+  </style>
+  <rect width="64" height="64" rx="12"/>
+  <text x="32" y="45"
+        font-family="Georgia, 'Times New Roman', serif"
+        font-size="38" font-weight="400"
+        text-anchor="middle">TO</text>
+</svg>

@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tim O'Brien</title>
+<meta name="description" content="Tim O'Brien — research on innovation, democracy, and state capacity.">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Roboto+Slab:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ground: #ffffff;
+    --ink:    #1c1e20;
+    --body:   #40474a;
+    --muted:  #868f92;
+    --rule:   #e6e9ea;
+    --accent: #2f6d80;
+    --tint:   #f4f7f8;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ground: #17191a;
+      --ink:    #ebedee;
+      --body:   #b6bdbf;
+      --muted:  #7d868a;
+      --rule:   #2a2e30;
+      --accent: #74b8cc;
+      --tint:   #1e2224;
+    }
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0; background: var(--ground); color: var(--body);
+    font-family: Roboto, -apple-system, "Helvetica Neue", Arial, sans-serif;
+    font-weight: 300; font-size: 16.5px; line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 2px; }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  /* ── nav (Kunievsky / al-folio) ─────────── */
+  nav { position: sticky; top: 0; z-index: 20; background: var(--ground); border-bottom: 1px solid var(--rule); }
+  .nav-in {
+    max-width: 820px; margin: 0 auto; padding: 13px 28px;
+    display: flex; align-items: center; gap: 18px;
+  }
+  .nav-soc { display: flex; gap: 16px; font-size: 16px; }
+  .nav-soc a { color: var(--muted); }
+  .nav-soc a:hover { color: var(--accent); }
+  .nav-lnk { margin-left: auto; display: flex; gap: 24px; font-size: 15px; }
+  .nav-lnk a { color: var(--ink); font-weight: 400; }
+  .nav-lnk a:hover { color: var(--accent); text-decoration: none; }
+
+  .wrap { max-width: 820px; margin: 0 auto; padding: 48px 28px 76px; }
+
+  /* ── header ─────────────────────────────── */
+  h1 {
+    font-family: "Roboto Slab", Georgia, serif;
+    font-size: clamp(32px, 5vw, 40px); font-weight: 300; color: var(--ink);
+    margin: 0 0 26px; letter-spacing: -0.4px; line-height: 1.15;
+  }
+  h1 b { font-weight: 500; }
+
+  .pic { float: right; width: 245px; margin: 4px 0 20px 36px; }
+  .pic img {
+    width: 100%; display: block; border-radius: 5px; background: var(--rule);
+    box-shadow: 0 2px 7px rgba(0,0,0,.12), 0 1px 3px rgba(0,0,0,.07);
+  }
+  .clear::after { content: ""; display: table; clear: both; }
+  p { margin: 0 0 16px; }
+
+  /* ── sections ───────────────────────────── */
+  h2 {
+    font-family: "Roboto Slab", Georgia, serif;
+    font-size: 25px; font-weight: 400; color: var(--ink);
+    margin: 52px 0 0; padding-bottom: 9px; border-bottom: 1px solid var(--rule);
+  }
+  h3 {
+    font-size: 12px; font-weight: 500; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--muted);
+    margin: 30px 0 16px;
+  }
+
+  /* ── papers (Goldsmith-Pinkham lines + Jang toggles) ── */
+  .p { margin: 0 0 20px; }
+  .p .t { color: var(--ink); font-weight: 500; font-size: 17px; line-height: 1.4; }
+  .p .m { font-size: 14.5px; color: var(--muted); margin-top: 3px; }
+  .p .m i { font-style: italic; }
+  .tags { margin-top: 7px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+  .tag {
+    font-size: 12.5px; letter-spacing: 0.02em;
+    padding: 2px 9px; border: 1px solid var(--rule); border-radius: 3px;
+    color: var(--accent); background: var(--ground);
+    cursor: pointer; user-select: none; font-family: inherit; font-weight: 400;
+  }
+  .tag:hover { border-color: var(--accent); text-decoration: none; }
+
+  /* collapsible abstract: explicit affordance */
+  details > summary { list-style: none; display: inline-block; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  .toggle {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 13.5px; color: var(--accent);
+    padding: 3px 11px 3px 9px; border: 1px solid var(--accent); border-radius: 3px;
+    background: var(--ground); user-select: none;
+  }
+  .toggle:hover { background: var(--tint); }
+  .toggle::before {
+    content: ""; width: 0; height: 0;
+    border-left: 5px solid currentColor;
+    border-top: 4px solid transparent; border-bottom: 4px solid transparent;
+    transition: transform .15s ease;
+  }
+  details[open] .toggle::before { transform: rotate(90deg); }
+  details[open] .toggle { background: var(--tint); }
+
+  .abs {
+    font-size: 15px; line-height: 1.62; margin: 11px 0 0;
+    padding: 13px 16px; background: var(--tint);
+    border-left: 2px solid var(--accent); border-radius: 0 3px 3px 0;
+  }
+  .abs.open { margin-top: 12px; }
+  .abs .lbl { font-weight: 500; color: var(--ink); }
+
+  /* ── education ──────────────────────────── */
+  .deg { display: flex; gap: 18px; margin-bottom: 14px; }
+  .deg .y { font-size: 14px; color: var(--muted); min-width: 68px; padding-top: 3px; font-variant-numeric: tabular-nums; }
+  .deg .d b { color: var(--ink); font-weight: 500; }
+  .deg .d span { display: block; font-size: 14.5px; color: var(--muted); }
+
+  footer {
+    margin-top: 56px; padding-top: 16px; border-top: 1px solid var(--rule);
+    font-size: 13px; color: var(--muted);
+    display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  }
+  footer .fs { margin-left: auto; display: flex; gap: 15px; font-size: 15px; }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 640px) {
+    .pic { float: none; width: 195px; margin: 0 0 22px; }
+    .nav-lnk { gap: 17px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-in">
+    <div class="nav-soc">
+      <a href="mailto:obrienwt@uchicago.edu" title="Email" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/obrientim" title="GitHub" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/tim-o-brien-501807234/" title="LinkedIn" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </div>
+    <div class="nav-lnk">
+      <a href="cv.pdf" target="_blank">CV</a>
+    </div>
+  </div>
+</nav>
+
+<div class="wrap">
+
+  <h1><b>Tim</b> O'Brien</h1>
+
+  <div class="pic"><img src="assets/photo.jpg" alt="Tim O'Brien"></div>
+
+  <div class="clear">
+    <p>Welcome! I am a Research Fellow at the Sa&iuml;d Business School, University of Oxford, and a
+    Research Assistant at the University of Chicago's Knowledge Lab. I hold an M.A. in International Relations
+    from the University of Chicago, where I also received my B.A. in Political Science.</p>
+
+    <p>My research focuses on topics in political economy, development, and comparative politics.
+    My current work uses applied econometrics and machine learning to investigate how economic and
+    technological change shape political institutions.</p>
+
+    <p>I am applying to predoctoral research positions for 2027, with the aim of pursuing a Ph.D. in
+    political economy.</p>
+
+    <p>You can access my CV <a href="cv.pdf" target="_blank">here</a>.</p>
+  </div>
+
+  <h2>Research</h2>
+
+  <h3>Working Papers</h3>
+
+  <div class="p">
+    <div class="t">Innovation without Democratization: The Political Limits of Technological Change</div>
+    <div class="m">M.A. thesis, University of Chicago &nbsp;·&nbsp; Advisor: Scott Gehlbach &nbsp;·&nbsp;
+      <a href="papers/innovation_without_democratization.pdf" target="_blank">PDF</a></div>
+    <p class="abs open">
+      <span class="lbl">Abstract.</span>
+      Innovation has been positively linked to a variety of economic outcomes, including long-run
+      development, productivity, and human capital. But its political effects have received far
+      less attention. To address this imbalance, I investigate the effect of innovation on democracy
+      and two intermediate outcomes, state capacity and capital mobility, using a shift-share
+      instrumental variables strategy on a panel of 187 countries from 1995 to 2015. This design
+      exploits quasi-random variation in global patenting growth across different fields of
+      knowledge to identify the effects of innovation. I find that innovation exerts no detectable
+      effect on democracy, but strongly and positively increases both state capacity and capital
+      mobility. A one-standard-deviation increase in log patents per million residents raises state
+      capacity by approximately half a standard deviation and capital mobility by roughly a quarter
+      of a standard deviation. I argue that the null effect of innovation on democracy stems from
+      the offsetting influences of these two forces. State capacity reduces the elites' costs of
+      repression and therefore inhibits democratization, while capital mobility decreases the costs
+      of conceding to democracy and thus promotes it. Consistent with this account, I find that
+      innovation widens the gap between the state's capacity and society's ability to hold it
+      accountable. A widening gap should erode democracy on its own, so paired with the null it
+      suggests that capital mobility offsets the state's growing power. My estimates are robust
+      across several specifications, measures, and samples.
+    </p>
+  </div>
+
+  <h3>Publications</h3>
+
+  <div class="p">
+    <div class="t">Does Economic Globalization Promote Democracy? An Empirical Investigation into the Political Consequences of Economic Integration</div>
+    <div class="m"><i>Berkeley Economic Review</i>, forthcoming 2026 &nbsp;·&nbsp; B.A. thesis &nbsp;·&nbsp; Advisor: Susan Stokes &nbsp;·&nbsp;
+      <a href="papers/economic_globalization_democracy.pdf" target="_blank">PDF</a></div>
+    <div class="tags">
+      <details>
+        <summary><span class="toggle">Show abstract</span></summary>
+        <p class="abs">
+          Global economic integration has been a defining feature of the 21st century, as has a
+          steady cross-national wave of democratic backsliding. Are these two trends related? Many
+          studies have tackled the impact of economic globalization on democracy, but most do not
+          model the persistence of democracy rigorously. I provide evidence that globalization's
+          relationship to democracy varies depending on the aspect of democracy under study. Trade
+          openness was found to have a negative association with electoral freeness and fairness,
+          while foreign direct investment outflows were positively associated with equality before
+          the law and civil liberties. The latter finding is heterogeneous across levels of
+          development, with subsample results suggesting that the relationship is almost entirely
+          driven by developing countries. I construct a panel of 143 countries from 1991 to 2023 and
+          employ a dynamic panel model to estimate the relationship between globalization and
+          democracy. Unlike other studies, I use a three-pronged operationalization of democracy,
+          separately examining the statistical associations of globalization with electoral quality,
+          civil liberties, and political equality. This granularization captures dynamics in
+          globalization's link to democracy that may otherwise go unnoticed or be misattributed to
+          democracy as a whole. The robustness of these results is examined under several different
+          model specifications, estimation techniques, and sample modifications. Last, I propose a
+          series of mechanisms that offer theoretical underpinnings to the empirical findings.
+        </p>
+      </details>
+    </div>
+  </div>
+
+  <div class="p">
+    <div class="t">A Crisis of Confidence: European Public Opinion in the Trump Era</div>
+    <div class="m">Chicago Council on Global Affairs, <i>Running Numbers</i> &nbsp;·&nbsp; 2025</div>
+    <div class="tags">
+      <a class="tag" href="https://globalaffairs.org/commentary-and-analysis/blogs/crisis-confidence-european-public-opinion-trump-era">Read</a>
+    </div>
+  </div>
+
+  <h2>Education</h2>
+
+  <div style="margin-top:20px">
+    <div class="deg">
+      <div class="y">2025–26</div>
+      <div class="d"><b>M.A. International Relations</b>, with Honors<span>University of Chicago</span></div>
+    </div>
+    <div class="deg">
+      <div class="y">2021–25</div>
+      <div class="d"><b>B.A. Political Science</b>, with Honors<span>University of Chicago</span></div>
+    </div>
+    <div class="deg">
+      <div class="y">2023–24</div>
+      <div class="d"><b>The General Course</b>, International Relations<span>London School of Economics</span></div>
+    </div>
+  </div>
+
+  <footer>
+    <span>Last updated August 2026</span>
+    <span class="fs">
+      <a href="mailto:obrienwt@uchicago.edu" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      <a href="https://github.com/obrientim" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      <a href="https://www.linkedin.com/in/tim-o-brien-501807234/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+    </span>
+  </footer>
+
+</div>
+</body>
+</html>
